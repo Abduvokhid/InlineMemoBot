@@ -13,9 +13,8 @@ type BotCommandItem = {
 const PRIVATE_CHAT_DEFAULT: BotCommandItem = {
   commands: [
     { command: 'start', description: 'Shows main menu' },
-    { command: 'help', description: 'Shows bot information' },
+    { command: 'about', description: 'Shows bot information' },
     { command: 'sponsors', description: 'Shows sponsors list' },
-    { command: 'settings', description: 'Shows bot settings' },
   ],
   scope: { type: 'all_private_chats' },
   language_code: undefined

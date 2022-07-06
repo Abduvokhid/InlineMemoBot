@@ -1,5 +1,5 @@
 import start from './start'
-import help from './help'
+import about from './about'
 import sponsors from './sponsors'
 
-export { start, help, sponsors }
+export { start, about, sponsors }
