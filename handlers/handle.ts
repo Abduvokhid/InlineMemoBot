@@ -4,6 +4,7 @@ import { start, about, sponsors } from '../library/commands'
 import { Router } from '@grammyjs/router'
 import { homeText } from './home-step'
 import postStep from './post-step'
+import enhanceStep from './enhance-step'
 
 async function setup (bot: Composer<MyPrivateContext>) {
 
@@ -19,6 +20,10 @@ async function setup (bot: Composer<MyPrivateContext>) {
 
   const post = router.route('create_post')
   post.on('message', postStep)
+
+  const enhance = router.route('enhance_post')
+  enhance.on('message:text', enhanceStep)
+  enhance.on('message', async ctx => await ctx.deleteMessage())
 
   router.otherwise(start)
 

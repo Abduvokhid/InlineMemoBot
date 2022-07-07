@@ -16,6 +16,7 @@ async function createPost (ctx: MyPrivateContext) {
   })
 
   ctx.session.step = 'create_post'
+  ctx.session.post = undefined
 }
 
 export default createPost

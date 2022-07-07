@@ -9,6 +9,7 @@ async function errorHandler(err: BotError<MyContext>) {
   } else if (e instanceof GrammyError) {
     logger.error(`Error in request: ${e.description}`)
     if (e.description.includes('can\'t parse entities')) {
+      // TODO: Format this message and move it to translation.ts
       await err.ctx.reply('Please, send valid text/caption with HTML tags or send formatted text/caption instead!')
     }
   } else if (e instanceof HttpError) {

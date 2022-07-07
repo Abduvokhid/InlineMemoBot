@@ -5,7 +5,7 @@ import { UserDocument } from '../models/User'
 import { Translation } from '../translation'
 
 interface SessionData {
-  step: 'home' | 'create_post',
+  step: 'home' | 'create_post' | 'enhance_post',
   language?: string,
   post?: Post,
 }
@@ -21,8 +21,12 @@ type MyApi = HydrateApiFlavor<Api>
 type MyPrivateContext = MyContext & ChatTypeContext<MyContext, 'private'> & { state: State }
 
 export type Post = {
+  preview_id?: string,
+  settings_id?: string,
   type: 'text' | 'animation' | 'audio' | 'document' | 'photo' | 'video' | 'voice'
   content: string,
+  disable_preview?: boolean,
+  caption?: string,
   entities?: MessageEntity[]
 }
 

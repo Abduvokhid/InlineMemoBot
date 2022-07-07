@@ -18,6 +18,7 @@ start (ctx: MyPrivateContext) {
   })
 
   ctx.session.step = 'home'
+  ctx.session.post = undefined
 }
 
 export default start
