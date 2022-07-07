@@ -1,7 +1,7 @@
-import { MyContext, MyPrivateContext } from '../types'
+import { MyGeneralContext, MyPrivateContext } from '../types'
 
 function isPrivate (
-  ctx: MyContext
+  ctx: MyGeneralContext
 ): ctx is MyPrivateContext {
   return ctx.chat?.type === 'private'
 }

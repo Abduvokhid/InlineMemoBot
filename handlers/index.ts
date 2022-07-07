@@ -1,14 +1,16 @@
 import { MyContext } from '../types'
 import { Bot } from 'grammy'
 import { logger } from '../utils'
-import errors from './errors'
 import { isPrivate } from '../filters'
-import handle from './handle'
+import handleMessages from './handle-messages'
+import handleInline from './handle-inline'
+import errors from './errors'
 
 async function setup (bot: Bot<MyContext>) {
   logger.info('Setting up handlers...')
   await errors.setup(bot)
-  await handle.setup(bot.filter(isPrivate))
+  await handleInline.setup(bot)
+  await handleMessages.setup(bot.filter(isPrivate))
 }
 
 export default { setup }

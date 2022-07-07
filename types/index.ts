@@ -15,10 +15,11 @@ interface State {
   translation?: Translation,
 }
 
-type MyContext = BaseContext & HydrateFlavor<BaseContext> & SessionFlavor<SessionData>
+type MyGeneralContext = BaseContext & HydrateFlavor<BaseContext>
+type MyContext = MyGeneralContext & SessionFlavor<SessionData> & { state: State }
 type MyApi = HydrateApiFlavor<Api>
 
-type MyPrivateContext = MyContext & ChatTypeContext<MyContext, 'private'> & { state: State }
+type MyPrivateContext = MyContext & ChatTypeContext<MyContext, 'private'>
 
 export type Post = {
   preview_id?: string,
@@ -30,4 +31,4 @@ export type Post = {
   entities?: MessageEntity[]
 }
 
-export { SessionData, MyContext, MyApi, MyPrivateContext }
+export { SessionData, MyContext, MyApi, MyPrivateContext, MyGeneralContext }

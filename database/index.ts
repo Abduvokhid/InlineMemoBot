@@ -13,6 +13,10 @@ async function setup (bot: Bot<MyContext>) {
 
   logger.info('Connected to database...')
 
+  await sessionSetup(bot)
+}
+
+async function sessionSetup (bot: Bot<MyContext>): Promise<void> {
   const collection = mongoose.connection.db.collection<ISession>('sessions')
   bot.use(session({
     initial: (): SessionData => ({

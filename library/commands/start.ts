@@ -1,17 +1,19 @@
 import { MyPrivateContext } from '../../types'
 import { Keyboard } from 'grammy'
 
-async function
-start (ctx: MyPrivateContext) {
+async function start (ctx: MyPrivateContext) {
+  await startCustom(ctx)
+}
+
+async function startCustom (ctx: MyPrivateContext, text: string | undefined = undefined) {
   const { menu, sections: { main } } = ctx.state.translation!
   const keyboard = new Keyboard()
     .text(menu.create_post).row()
     .text(menu.sponsors).text(menu.about_us).row()
 
-  await ctx.reply(main.content, {
+  await ctx.reply(text ?? main.content, {
     reply_markup: {
       resize_keyboard: true,
-      one_time_keyboard: true,
       input_field_placeholder: main.placeholder,
       keyboard: keyboard.build()
     }
@@ -21,4 +23,5 @@ start (ctx: MyPrivateContext) {
   ctx.session.post = undefined
 }
 
+export { startCustom }
 export default start

@@ -1,7 +1,7 @@
 import { getModelForClass, prop } from '@typegoose/typegoose'
 import { Document } from 'mongoose'
 
-class User {
+export class User {
   @prop({ required: true })
   public telegram_id!: string
 

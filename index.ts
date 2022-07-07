@@ -18,7 +18,7 @@ process.once('SIGTERM', async () => {
 bot.start({
   drop_pending_updates: true,
   allowed_updates: [
-    'message', 'callback_query', 'inline_query'
+    'message', 'inline_query'
   ],
   onStart: onStartup
 })

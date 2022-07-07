@@ -2,6 +2,7 @@ import { MyPrivateContext } from '../types'
 import createPost from '../library/states/create-post'
 import togglePreview from '../library/states/toggle-preview'
 import removeCaption from '../library/states/remove-caption'
+import confirmPost from '../library/states/confirm-post'
 
 async function enhanceStep (ctx: MyPrivateContext) {
   const { buttons } = ctx.state.translation!
@@ -20,6 +21,7 @@ async function enhanceStep (ctx: MyPrivateContext) {
       await removeCaption(ctx)
       break
     case buttons.confirm_post:
+      await confirmPost(ctx)
       break
     default:
       await ctx.deleteMessage()

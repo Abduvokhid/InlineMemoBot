@@ -2,6 +2,9 @@ const sponsors = [{ name: 'Telegram', link: 'https://t.me/telegram' }]
 
 const translation = {
   en: {
+    errors: {
+      invalid_tags: '<b>Please, send valid text/caption with HTML tags or send formatted text/caption instead!</b>'
+    },
     buttons: {
       go_back: '⬅ Go back',
       remove_caption: '♻ Remove caption',
@@ -10,8 +13,12 @@ const translation = {
       add_buttons: '➕ Add buttons',
       confirm_post: '✅ Confirm'
     },
+    inline: {
+      create_post: 'Create a post',
+      result_title: 'Click here to send'
+    },
     menu: {
-      create_post: '✏ Create a post',
+      create_post: '📝 Create a post',
       about_us: '📖 About us',
       sponsors: '✨ Sponsors'
     },
@@ -32,8 +39,11 @@ const translation = {
         placeholder: 'Send the content...'
       },
       enhance_post: {
-        content: "⬆ This is how your post will look like.\n\nPlease, customize if needed. Then confirm the post creation.",
+        content: '<b>⬆ This is how your post will look like.</b>\n\nPlease, customize if needed. Then confirm the post creation.',
         placeholder: 'Customize or confirm...'
+      },
+      confirm_post: {
+        content: '<b>⬆ Your post has been created!</b>\n\nUse the given code to send the post anywhere.'
       }
     }
   }
