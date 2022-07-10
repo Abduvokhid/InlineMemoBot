@@ -1,0 +1,1 @@
+{"version":3,"file":"on-shutdown.js","sourceRoot":"","sources":["../../utils/on-shutdown.ts"],"names":[],"mappings":";;;;;;;;;;;;;;AACA,sDAA6B;AAG7B,SAAe,UAAU,CAAE,GAAmB;;QAC5C,gBAAM,CAAC,IAAI,CAAC,oBAAoB,CAAC,CAAA;QACjC,MAAM,GAAG,CAAC,GAAG,CAAC,aAAa,CAAC,EAAE,oBAAoB,EAAE,IAAI,EAAE,CAAC,CAAA;IAC7D,CAAC;CAAA;AAED,kBAAe,UAAU,CAAA"}
