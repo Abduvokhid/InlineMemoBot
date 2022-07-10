@@ -2,6 +2,7 @@ import { MyPrivateContext } from '../types'
 import { NextFunction } from 'grammy'
 import { UserModel } from '../models/User'
 import translation, { TranslationKey } from '../translation'
+import { generateString } from '../utils/generators'
 
 async function userSetup (ctx: MyPrivateContext, next: NextFunction): Promise<void> {
   ctx.session.language = ctx.from?.language_code || 'en'
@@ -17,6 +18,13 @@ async function userSetup (ctx: MyPrivateContext, next: NextFunction): Promise<vo
 
   ctx.state.user = user
   ctx.state.translation = translation[user.language as TranslationKey] || translation.en
+
+  if (!ctx.session.credentials || ctx.session.credentials.valid_until < new Date(Date.now() + 3600000)) {
+    ctx.session.credentials = {
+      token: generateString(32),
+      valid_until: new Date(Date.now() + 86400000)
+    }
+  }
 
   await next()
 }

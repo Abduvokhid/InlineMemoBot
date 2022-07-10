@@ -1,6 +1,7 @@
 import { getModelForClass, modelOptions, prop, Ref, Severity } from '@typegoose/typegoose'
 import mongoose, { Document } from 'mongoose'
 import { User } from './User'
+import { Button } from '../types'
 
 @modelOptions({ options: { allowMixed: Severity.ALLOW } })
 class Post {
@@ -24,6 +25,9 @@ class Post {
 
   @prop({ type: mongoose.Schema.Types.Mixed })
   public entities?: object[]
+
+  @prop({ required: true, type: mongoose.Schema.Types.Mixed })
+  public buttons!: Button[][]
 
 }
 

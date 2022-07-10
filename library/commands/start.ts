@@ -1,26 +1,28 @@
-import { MyPrivateContext } from '../../types'
-import { Keyboard } from 'grammy'
+import { MyContext } from '../../types'
+import { InlineKeyboard } from 'grammy'
 
-async function start (ctx: MyPrivateContext) {
+async function start (ctx: MyContext) {
+  if (ctx.callbackQuery) await ctx.deleteMessage()
   await startCustom(ctx)
 }
 
-async function startCustom (ctx: MyPrivateContext, text: string | undefined = undefined) {
+async function startCustom (ctx: MyContext, text: string | undefined = undefined) {
   const { menu, sections: { main } } = ctx.state.translation!
-  const keyboard = new Keyboard()
-    .text(menu.create_post).row()
-    .text(menu.sponsors).text(menu.about_us).row()
+  const inline_keyboard = new InlineKeyboard()
+    .text(menu.create_post, 'create_post').row()
+    .text(menu.sponsors, 'sponsors').text(menu.about_us, 'about_us').row()
 
-  await ctx.reply(text ?? main.content, {
-    reply_markup: {
-      resize_keyboard: true,
-      input_field_placeholder: main.placeholder,
-      keyboard: keyboard.build()
-    }
+  const message = await ctx.reply(text ?? main.content, {
+    reply_markup: inline_keyboard
   })
+
+  if (ctx.session.post?.settings_id) await ctx.api.deleteMessage(ctx.chat!.id, parseInt(ctx.session.post!.settings_id))
+  if (ctx.session.post?.preview_id) await ctx.api.deleteMessage(ctx.chat!.id, parseInt(ctx.session.post.preview_id))
+  if (ctx.session.current_id) await ctx.api.deleteMessage(ctx.chat!.id, parseInt(ctx.session.current_id))
 
   ctx.session.step = 'home'
   ctx.session.post = undefined
+  ctx.session.current_id = message.message_id.toString()
 }
 
 export { startCustom }

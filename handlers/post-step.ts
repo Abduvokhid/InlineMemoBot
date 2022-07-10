@@ -17,28 +17,31 @@ async function postStep (ctx: MyPrivateContext) {
   if (poll || dice || game || invoice || media_group_id || contact || sticker || video_note || venue || location)
     return await ctx.deleteMessage()
 
-  let post: Post = { type: 'text', content: '' }
+  let post: Post = { buttons: [], type: 'text', content: '' }
 
   if (text) {
     if (text === buttons.go_back) return await start(ctx)
-    post = { type: 'text', content: text, entities: entities, disable_preview: true }
+    post = { buttons: [], type: 'text', content: text, entities: entities, disable_preview: true }
   } else if (animation) {
-    post = { type: 'animation', content: animation.file_id, caption: caption, entities: caption_entities }
+    post = { buttons: [], type: 'animation', content: animation.file_id, caption: caption, entities: caption_entities }
   } else if (audio) {
-    post = { type: 'audio', content: audio.file_id, caption: caption, entities: caption_entities }
+    post = { buttons: [], type: 'audio', content: audio.file_id, caption: caption, entities: caption_entities }
   } else if (document) {
-    post = { type: 'document', content: document.file_id, caption: caption, entities: caption_entities }
+    post = { buttons: [], type: 'document', content: document.file_id, caption: caption, entities: caption_entities }
   } else if (photo) {
-    post = { type: 'photo', content: photo[photo.length - 1].file_id, caption: caption, entities: caption_entities }
+    post = { buttons: [], type: 'photo', content: photo[photo.length - 1].file_id, caption: caption, entities: caption_entities }
   } else if (video) {
-    post = { type: 'video', content: video.file_id, caption: caption, entities: caption_entities }
+    post = { buttons: [], type: 'video', content: video.file_id, caption: caption, entities: caption_entities }
   } else if (voice) {
-    post = { type: 'voice', content: voice.file_id, caption: caption, entities: caption_entities }
+    post = { buttons: [], type: 'voice', content: voice.file_id, caption: caption, entities: caption_entities }
   }
 
   ctx.session.post = post
   await sendPreview(ctx)
-
+  if (ctx.session.current_id) {
+    await ctx.api.editMessageReplyMarkup(ctx.chat!.id, parseInt(ctx.session.current_id))
+    ctx.session.current_id = undefined
+  }
 }
 
 export default postStep

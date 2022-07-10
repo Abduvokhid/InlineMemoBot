@@ -1,8 +1,9 @@
 import { MyPrivateContext } from '../../types'
-import { Keyboard } from 'grammy'
+import { InlineKeyboard } from 'grammy'
 import { Message } from 'grammy/out/platform.node'
 import { MessageEntity } from '@grammyjs/types/message'
 import { Other } from '@grammyjs/hydrate'
+import { generateKeyboard } from '../../utils/misc'
 
 function captionOptions (caption: string | undefined, entities: MessageEntity[] | undefined): Other<any> {
   if (!caption) return {}
@@ -15,54 +16,77 @@ function captionOptions (caption: string | undefined, entities: MessageEntity[] 
 
 async function sendPreview (ctx: MyPrivateContext) {
   const { sections: { enhance_post }, buttons } = ctx.state.translation!
-  const { post } = ctx.session
+  const { post, credentials } = ctx.session
+  const token = credentials!.token
 
   if (!post) return
 
-  const keyboard = new Keyboard()
+  const keyboard = new InlineKeyboard()
   let preview: Message
 
   switch (post.type) {
     case 'text':
-      const options = post.entities && post.entities.length > 0 ? { entities: post.entities, parse_mode: undefined } : {}
-      preview = await ctx.reply(post.content, { ...options, disable_web_page_preview: post.disable_preview })
-      keyboard.text(buttons.enable_preview).row()
+      const options = post.entities && post.entities.length > 0 ? {
+        entities: post.entities,
+        parse_mode: undefined
+      } : {}
+      preview = await ctx.reply(post.content, {
+        ...options,
+        reply_markup: generateKeyboard(post.buttons, token),
+        disable_web_page_preview: post.disable_preview
+      })
+      const entity = preview.entities?.find(entity => entity.type === 'url')
+      if (entity) keyboard.text(buttons.enable_preview, 'toggle_preview').row()
+      else post.disable_preview = undefined
       break
     case 'animation':
-      preview = await ctx.replyWithAnimation(post.content, captionOptions(post.caption, post.entities))
-      if (preview.caption) keyboard.text(buttons.remove_caption).row()
+      preview = await ctx.replyWithAnimation(post.content, {
+        ...captionOptions(post.caption, post.entities),
+        reply_markup: generateKeyboard(post.buttons, token)
+      })
+      if (preview.caption) keyboard.text(buttons.remove_caption, 'remove_caption').row()
       break
     case 'audio':
-      preview = await ctx.replyWithAudio(post.content, captionOptions(post.caption, post.entities))
-      if (preview.caption) keyboard.text(buttons.remove_caption).row()
+      preview = await ctx.replyWithAudio(post.content, {
+        ...captionOptions(post.caption, post.entities),
+        reply_markup: generateKeyboard(post.buttons, token)
+      })
+      if (preview.caption) keyboard.text(buttons.remove_caption, 'remove_caption').row()
       break
     case 'document':
-      preview = await ctx.replyWithDocument(post.content, captionOptions(post.caption, post.entities))
-      if (preview.caption) keyboard.text(buttons.remove_caption).row()
+      preview = await ctx.replyWithDocument(post.content, {
+        ...captionOptions(post.caption, post.entities),
+        reply_markup: generateKeyboard(post.buttons, token)
+      })
+      if (preview.caption) keyboard.text(buttons.remove_caption, 'remove_caption').row()
       break
     case 'photo':
-      preview = await ctx.replyWithPhoto(post.content, captionOptions(post.caption, post.entities))
-      if (preview.caption) keyboard.text(buttons.remove_caption).row()
+      preview = await ctx.replyWithPhoto(post.content, {
+        ...captionOptions(post.caption, post.entities),
+        reply_markup: generateKeyboard(post.buttons, token)
+      })
+      if (preview.caption) keyboard.text(buttons.remove_caption, 'remove_caption').row()
       break
     case 'video':
-      preview = await ctx.replyWithVideo(post.content, captionOptions(post.caption, post.entities))
-      if (preview.caption) keyboard.text(buttons.remove_caption).row()
+      preview = await ctx.replyWithVideo(post.content, {
+        ...captionOptions(post.caption, post.entities),
+        reply_markup: generateKeyboard(post.buttons, token)
+      })
+      if (preview.caption) keyboard.text(buttons.remove_caption, 'remove_caption').row()
       break
     case 'voice':
-      preview = await ctx.replyWithVoice(post.content, captionOptions(post.caption, post.entities))
-      if (preview.caption) keyboard.text(buttons.remove_caption).row()
+      preview = await ctx.replyWithVoice(post.content, {
+        ...captionOptions(post.caption, post.entities),
+        reply_markup: generateKeyboard(post.buttons, token)
+      })
+      if (preview.caption) keyboard.text(buttons.remove_caption, 'remove_caption').row()
       break
   }
-  keyboard.webApp(buttons.add_buttons, process.env.BUTTONS_URL!).row()
-  keyboard.text(buttons.go_back).text(buttons.confirm_post).row()
+  keyboard.text(buttons.go_back, 'create_post').text(buttons.confirm_post, 'confirm_post').row()
   post.preview_id = preview!.message_id.toString()
 
   const settings = await ctx.reply(enhance_post.content, {
-    reply_markup: {
-      keyboard: keyboard.build(),
-      input_field_placeholder: enhance_post.placeholder,
-      resize_keyboard: true
-    }
+    reply_markup: keyboard
   })
   post.settings_id = settings!.message_id.toString()
 

@@ -9,6 +9,10 @@ async function setup (bot: Bot<MyContext>) {
   logger.info('Setting up middlewares...')
 
   bot.use(hydrateContext())
+  bot.use(async (ctx, next) => {
+    // console.log(JSON.stringify(ctx.update))
+    await next()
+  })
   bot.filter(isPrivate).use(userSetup)
 }
 

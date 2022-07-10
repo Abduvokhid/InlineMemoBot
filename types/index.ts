@@ -7,12 +7,24 @@ import { Translation } from '../translation'
 interface SessionData {
   step: 'home' | 'create_post' | 'enhance_post',
   language?: string,
+  current_id?: string,
   post?: Post,
+  credentials?: {
+    token: string,
+    valid_until: Date
+  }
+}
+
+interface Button {
+  type: 'link' | 'message_box' | 'share' | 'share_post',
+  name: string,
+  link?: string
+  message?: string
 }
 
 interface State {
   user?: UserDocument,
-  translation?: Translation,
+  translation?: Translation
 }
 
 type MyGeneralContext = BaseContext & HydrateFlavor<BaseContext>
@@ -28,7 +40,8 @@ export type Post = {
   content: string,
   disable_preview?: boolean,
   caption?: string,
-  entities?: MessageEntity[]
+  entities?: MessageEntity[],
+  buttons: Button[][]
 }
 
-export { SessionData, MyContext, MyApi, MyPrivateContext, MyGeneralContext }
+export { SessionData, MyContext, MyApi, MyPrivateContext, MyGeneralContext, Button }

@@ -1,22 +1,20 @@
-import { MyPrivateContext } from '../../types'
-import { Keyboard } from 'grammy'
+import { MyContext } from '../../types'
+import { InlineKeyboard } from 'grammy'
 
-async function createPost (ctx: MyPrivateContext) {
+async function createPost (ctx: MyContext) {
   const { buttons, sections: { create_post } } = ctx.state.translation!
-  const keyboard = new Keyboard()
-    .text(buttons.go_back).row()
+  const inline_keyboard = new InlineKeyboard()
+    .text(buttons.go_back, 'home').row()
 
-  await ctx.reply(create_post.content, {
-    reply_markup: {
-      resize_keyboard: true,
-      one_time_keyboard: true,
-      input_field_placeholder: create_post.placeholder,
-      keyboard: keyboard.build()
-    }
+  await ctx.editMessageText(create_post.content, {
+    reply_markup: inline_keyboard
   })
+
+  if (ctx.session.post?.preview_id) await ctx.api.deleteMessage(ctx.chat!.id, parseInt(ctx.session.post.preview_id))
 
   ctx.session.step = 'create_post'
   ctx.session.post = undefined
+  ctx.session.current_id = ctx.callbackQuery?.message?.message_id.toString()
 }
 
 export default createPost

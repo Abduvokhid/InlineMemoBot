@@ -5,14 +5,17 @@ import { PostDocument, PostModel } from '../models/Post'
 import { MessageEntity } from '@grammyjs/types/message'
 import { InlineQueryResult } from 'grammy/out/platform.node'
 import { UserModel } from '../models/User'
+import { generateInlineKeyboard } from '../utils/misc'
 
 function generateAnswerFromPost (post: PostDocument, title: string): InlineQueryResult {
+  const keyboard = generateInlineKeyboard(post.buttons, post.unique_id)
   switch (post.type) {
     case 'text':
       return {
         type: 'article',
         id: post._id,
         title: title,
+        reply_markup: keyboard,
         input_message_content: {
           message_text: post.content,
           entities: post.entities as MessageEntity[],
@@ -26,6 +29,7 @@ function generateAnswerFromPost (post: PostDocument, title: string): InlineQuery
         id: post._id,
         title: title,
         mpeg4_file_id: post.content,
+        reply_markup: keyboard,
         caption: post.caption,
         caption_entities: post.entities as MessageEntity[],
         parse_mode: post.entities && post.entities.length > 0 ? undefined : 'HTML',
@@ -36,6 +40,7 @@ function generateAnswerFromPost (post: PostDocument, title: string): InlineQuery
         id: post._id,
         title: title,
         audio_file_id: post.content,
+        reply_markup: keyboard,
         caption: post.caption,
         caption_entities: post.entities as MessageEntity[],
         parse_mode: post.entities && post.entities.length > 0 ? undefined : 'HTML',
@@ -46,6 +51,7 @@ function generateAnswerFromPost (post: PostDocument, title: string): InlineQuery
         id: post._id,
         title: title,
         document_file_id: post.content,
+        reply_markup: keyboard,
         caption: post.caption,
         caption_entities: post.entities as MessageEntity[],
         parse_mode: post.entities && post.entities.length > 0 ? undefined : 'HTML',
@@ -56,6 +62,7 @@ function generateAnswerFromPost (post: PostDocument, title: string): InlineQuery
         id: post._id,
         title: title,
         photo_file_id: post.content,
+        reply_markup: keyboard,
         caption: post.caption,
         caption_entities: post.entities as MessageEntity[],
         parse_mode: post.entities && post.entities.length > 0 ? undefined : 'HTML',
@@ -67,6 +74,7 @@ function generateAnswerFromPost (post: PostDocument, title: string): InlineQuery
         title: title,
         video_file_id: post.content,
         caption: post.caption,
+        reply_markup: keyboard,
         caption_entities: post.entities as MessageEntity[],
         parse_mode: post.entities && post.entities.length > 0 ? undefined : 'HTML',
       }
@@ -77,6 +85,7 @@ function generateAnswerFromPost (post: PostDocument, title: string): InlineQuery
         title: title,
         voice_file_id: post.content,
         caption: post.caption,
+        reply_markup: keyboard,
         caption_entities: post.entities as MessageEntity[],
         parse_mode: post.entities && post.entities.length > 0 ? undefined : 'HTML',
       }

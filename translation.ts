@@ -39,7 +39,7 @@ const translation = {
         placeholder: 'Send the content...'
       },
       enhance_post: {
-        content: '<b>⬆ This is how your post will look like.</b>\n\nPlease, customize if needed. Then confirm the post creation.',
+        content: '<b>⬆ This is how your post will look like.</b>\n\nPlease, customize if needed. Then confirm the post creation.\n\nClick the added button to remove it from the post.',
         placeholder: 'Customize or confirm...'
       },
       confirm_post: {
