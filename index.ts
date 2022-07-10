@@ -58,4 +58,4 @@ app.use(async (err: Error | BotError, req: Request, res: Response, _: NextFuncti
   }
 })
 
-app.listen(8080, onStartup.setup)
+app.listen(process.env.PORT || 5000, onStartup.setup)
