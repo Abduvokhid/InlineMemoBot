@@ -1,7 +1,7 @@
 module.exports = {
   apps: [{
     name: 'inlinememobot',
-    script: './dist/index.js',
+    script: 'dist/index.js',
     cwd: '/var/www/InlineMemo/bot/',
     watch: true,
     ignore_watch: ['node_modules'],
