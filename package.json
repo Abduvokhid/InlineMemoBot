@@ -5,6 +5,7 @@
   "author": "Abduvokhid Akhmedov",
   "private": true,
   "license": "UNLICENSED",
+  "main": "./dist/index.js",
   "scripts": {
     "prestart": "npx tsc",
     "start": "node ./dist/index.js"
