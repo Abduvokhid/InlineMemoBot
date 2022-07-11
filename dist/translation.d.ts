@@ -14,6 +14,7 @@ declare const translation: {
         inline: {
             create_post: string;
             result_title: string;
+            result_description: string;
         };
         menu: {
             create_post: string;

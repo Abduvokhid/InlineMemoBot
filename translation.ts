@@ -15,7 +15,8 @@ const translation = {
     },
     inline: {
       create_post: 'Create a post',
-      result_title: 'Click here to send'
+      result_title: 'Click here to send',
+      result_description: 'The post will be sent here on your behalf'
     },
     menu: {
       create_post: '📝 Create a post',
@@ -32,7 +33,7 @@ const translation = {
         list: sponsors
       },
       about: {
-        content: '<b>@InlineMemoBot</b> — helps to create posts to send them later to any chat without re-creating it. Bot supports text, photo, video, audio, voice, GIF and document. Just type <code>@InlineMemoBot</code> and post ID in any chat to send created a post.\n\nContact me with suggestions and feedback: @Developer616'
+        content: '<b>@InlineMemoBot</b> — helps to create posts to send them later to any chat without re-creating it. Bot supports text, photo, video, audio, voice, GIF and document. Just type <code>@InlineMemoBot</code> and post ID in any chat to send created post.\n\nContact me with suggestions and feedback: @Developer616'
       },
       create_post: {
         content: '<b>Now send the content of the post.</b>\n\n<i>It might be one of text, photo, audio, video, document, animation/GIF or voice. All other types of content is not accepted.</i>\n\nInclude captions if you need one. Already formatted text/caption is accepted or you can send text/caption with HTML tags.',

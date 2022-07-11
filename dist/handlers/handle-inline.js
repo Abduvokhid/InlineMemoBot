@@ -16,7 +16,7 @@ const translation_1 = __importDefault(require("../translation"));
 const Post_1 = require("../models/Post");
 const User_1 = require("../models/User");
 const misc_1 = require("../utils/misc");
-function generateAnswerFromPost(post, title) {
+function generateAnswerFromPost(post, title, description) {
     const keyboard = (0, misc_1.generateInlineKeyboard)(post.buttons, post.unique_id);
     switch (post.type) {
         case 'text':
@@ -24,6 +24,7 @@ function generateAnswerFromPost(post, title) {
                 type: 'article',
                 id: post._id,
                 title: title,
+                description: description !== null && description !== void 0 ? description : `Code: ${post.unique_id}`,
                 reply_markup: keyboard,
                 input_message_content: {
                     message_text: post.content,
@@ -37,6 +38,7 @@ function generateAnswerFromPost(post, title) {
                 type: 'mpeg4_gif',
                 id: post._id,
                 title: title,
+                description: description !== null && description !== void 0 ? description : `Code: ${post.unique_id}`,
                 mpeg4_file_id: post.content,
                 reply_markup: keyboard,
                 caption: post.caption,
@@ -48,6 +50,7 @@ function generateAnswerFromPost(post, title) {
                 type: 'audio',
                 id: post._id,
                 title: title,
+                description: description !== null && description !== void 0 ? description : `Code: ${post.unique_id}`,
                 audio_file_id: post.content,
                 reply_markup: keyboard,
                 caption: post.caption,
@@ -59,6 +62,7 @@ function generateAnswerFromPost(post, title) {
                 type: 'document',
                 id: post._id,
                 title: title,
+                description: description !== null && description !== void 0 ? description : `Code: ${post.unique_id}`,
                 document_file_id: post.content,
                 reply_markup: keyboard,
                 caption: post.caption,
@@ -70,6 +74,7 @@ function generateAnswerFromPost(post, title) {
                 type: 'photo',
                 id: post._id,
                 title: title,
+                description: description !== null && description !== void 0 ? description : `Code: ${post.unique_id}`,
                 photo_file_id: post.content,
                 reply_markup: keyboard,
                 caption: post.caption,
@@ -81,6 +86,7 @@ function generateAnswerFromPost(post, title) {
                 type: 'video',
                 id: post._id,
                 title: title,
+                description: description !== null && description !== void 0 ? description : `Code: ${post.unique_id}`,
                 video_file_id: post.content,
                 caption: post.caption,
                 reply_markup: keyboard,
@@ -92,6 +98,7 @@ function generateAnswerFromPost(post, title) {
                 type: 'voice',
                 id: post._id,
                 title: title,
+                description: description !== null && description !== void 0 ? description : `Code: ${post.unique_id}`,
                 voice_file_id: post.content,
                 caption: post.caption,
                 reply_markup: keyboard,

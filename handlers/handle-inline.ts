@@ -7,7 +7,7 @@ import { InlineQueryResult } from 'grammy/out/platform.node'
 import { UserModel } from '../models/User'
 import { generateInlineKeyboard } from '../utils/misc'
 
-function generateAnswerFromPost (post: PostDocument, title: string): InlineQueryResult {
+function generateAnswerFromPost (post: PostDocument, title: string, description?: string): InlineQueryResult {
   const keyboard = generateInlineKeyboard(post.buttons, post.unique_id)
   switch (post.type) {
     case 'text':
@@ -15,6 +15,7 @@ function generateAnswerFromPost (post: PostDocument, title: string): InlineQuery
         type: 'article',
         id: post._id,
         title: title,
+        description: description ?? `Code: ${post.unique_id}`,
         reply_markup: keyboard,
         input_message_content: {
           message_text: post.content,
@@ -28,6 +29,7 @@ function generateAnswerFromPost (post: PostDocument, title: string): InlineQuery
         type: 'mpeg4_gif',
         id: post._id,
         title: title,
+        description: description ?? `Code: ${post.unique_id}`,
         mpeg4_file_id: post.content,
         reply_markup: keyboard,
         caption: post.caption,
@@ -39,6 +41,7 @@ function generateAnswerFromPost (post: PostDocument, title: string): InlineQuery
         type: 'audio',
         id: post._id,
         title: title,
+        description: description ?? `Code: ${post.unique_id}`,
         audio_file_id: post.content,
         reply_markup: keyboard,
         caption: post.caption,
@@ -50,6 +53,7 @@ function generateAnswerFromPost (post: PostDocument, title: string): InlineQuery
         type: 'document',
         id: post._id,
         title: title,
+        description: description ?? `Code: ${post.unique_id}`,
         document_file_id: post.content,
         reply_markup: keyboard,
         caption: post.caption,
@@ -61,6 +65,7 @@ function generateAnswerFromPost (post: PostDocument, title: string): InlineQuery
         type: 'photo',
         id: post._id,
         title: title,
+        description: description ?? `Code: ${post.unique_id}`,
         photo_file_id: post.content,
         reply_markup: keyboard,
         caption: post.caption,
@@ -72,6 +77,7 @@ function generateAnswerFromPost (post: PostDocument, title: string): InlineQuery
         type: 'video',
         id: post._id,
         title: title,
+        description: description ?? `Code: ${post.unique_id}`,
         video_file_id: post.content,
         caption: post.caption,
         reply_markup: keyboard,
@@ -83,6 +89,7 @@ function generateAnswerFromPost (post: PostDocument, title: string): InlineQuery
         type: 'voice',
         id: post._id,
         title: title,
+        description: description ?? `Code: ${post.unique_id}`,
         voice_file_id: post.content,
         caption: post.caption,
         reply_markup: keyboard,
