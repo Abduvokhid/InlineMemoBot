@@ -13,11 +13,11 @@ const grammy_1 = require("grammy");
 function about(ctx) {
     var _a, _b;
     return __awaiter(this, void 0, void 0, function* () {
-        const { menu } = ctx.state.translation;
+        const { menu, sections: { about } } = ctx.state.translation;
         const inline_keyboard = new grammy_1.InlineKeyboard()
             .text(menu.create_post, 'create_post').row()
             .text(menu.sponsors, 'sponsors').text(menu.about_us, 'about_us').row();
-        const text = 'This is about text';
+        const text = about.content;
         if (ctx.callbackQuery) {
             yield ctx.editMessageText(text, { disable_web_page_preview: true, reply_markup: inline_keyboard });
         }

@@ -2,13 +2,13 @@ import { MyContext } from '../../types'
 import { InlineKeyboard } from 'grammy'
 
 async function about (ctx: MyContext) {
-  const { menu } = ctx.state.translation!
+  const { menu, sections: { about } } = ctx.state.translation!
 
   const inline_keyboard = new InlineKeyboard()
     .text(menu.create_post, 'create_post').row()
     .text(menu.sponsors, 'sponsors').text(menu.about_us, 'about_us').row()
 
-  const text = 'This is about text'
+  const text = about.content
 
   if (ctx.callbackQuery) {
     await ctx.editMessageText(text, { disable_web_page_preview: true, reply_markup: inline_keyboard })
