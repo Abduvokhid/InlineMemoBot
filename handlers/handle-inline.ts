@@ -107,7 +107,7 @@ async function handleInlineQuery (ctx: MyContext) {
   if (query.length > 0) {
     const post = await PostModel.findOne({ unique_id: query })
     if (post) {
-      await ctx.answerInlineQuery([generateAnswerFromPost(post, inline.result_title)], {
+      await ctx.answerInlineQuery([generateAnswerFromPost(post, inline.result_title, inline.result_description)], {
         cache_time: 0,
         is_personal: true
       })

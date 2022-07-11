@@ -115,7 +115,7 @@ function handleInlineQuery(ctx) {
         if (query.length > 0) {
             const post = yield Post_1.PostModel.findOne({ unique_id: query });
             if (post) {
-                yield ctx.answerInlineQuery([generateAnswerFromPost(post, inline.result_title)], {
+                yield ctx.answerInlineQuery([generateAnswerFromPost(post, inline.result_title, inline.result_description)], {
                     cache_time: 0,
                     is_personal: true
                 });
