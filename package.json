@@ -5,10 +5,10 @@
   "author": "Abduvokhid Akhmedov",
   "private": true,
   "license": "UNLICENSED",
-  "main": "./dist/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "prestart": "npx tsc",
-    "start": "node ./dist/index.js"
+    "start": "node dist/index.js"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
