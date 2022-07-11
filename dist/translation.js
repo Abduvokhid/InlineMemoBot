@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const sponsors = [{ name: 'Telegram', link: 'https://t.me/telegram' }];
+const sponsors = [{ name: 'Обзорчик+', link: 'https://t.me/ObzorchikPlus' }];
 const translation = {
     en: {
         errors: {
