@@ -15,7 +15,7 @@ function isValidUrl(urlString) {
 }
 exports.isValidUrl = isValidUrl;
 function generateKeyboard(buttons, token) {
-    const url = `${process.env.BUTTON_DOMAIN}${process.env.BUTTON_PATH}`;
+    const url = `${process.env.WEBAPP_DOMAIN}/buttons/add`;
     const keyboard = new grammy_1.InlineKeyboard();
     buttons.forEach((buttonsRow, index) => {
         buttonsRow.forEach((button, index2) => keyboard.text(button.name, `remove_button:${index}-${index2}`));

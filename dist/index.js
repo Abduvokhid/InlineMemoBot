@@ -22,8 +22,8 @@ const add_button_1 = __importDefault(require("./server/add-button"));
 const utils_1 = require("./utils");
 const app = (0, express_1.default)();
 middlewares_1.default.setup(app);
-app.post(process.env.WEBHOOK_PATH, (0, grammy_1.webhookCallback)(bot_1.default, 'express', { secretToken: process.env.WEBHOOK_SECRET }));
-app.post(process.env.BUTTON_PATH, add_button_1.default);
+app.post('/telegram/bot', (0, grammy_1.webhookCallback)(bot_1.default, 'express', { secretToken: process.env.BOT_SECRET }));
+app.post('/buttons/add', add_button_1.default);
 function botErrorHandler(err) {
     return __awaiter(this, void 0, void 0, function* () {
         const e = err.error;

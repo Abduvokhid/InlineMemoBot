@@ -26,6 +26,7 @@ function togglePreview(ctx) {
                 .text(buttons.go_back, 'create_post').text(buttons.confirm_post, 'confirm_post').row();
             yield ctx.api.editMessageReplyMarkup(ctx.chat.id, ctx.callbackQuery.message.message_id, { reply_markup: keyboard });
             post.disable_preview = disable_preview;
+            yield ctx.answerCallbackQuery();
         }
     });
 }

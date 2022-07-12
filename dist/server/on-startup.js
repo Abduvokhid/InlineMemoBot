@@ -17,10 +17,10 @@ const bot_1 = __importDefault(require("../bot"));
 function setup() {
     return __awaiter(this, void 0, void 0, function* () {
         utils_1.logger.info('Web server started...');
-        const url = `${process.env.WEBHOOK_URL}${process.env.WEBHOOK_PATH}`;
+        const url = `${process.env.BOT_DOMAIN}/telegram/bot`;
         yield bot_1.default.api.setWebhook(url, {
             drop_pending_updates: true,
-            secret_token: process.env.WEBHOOK_SECRET,
+            secret_token: process.env.BOT_SECRET,
             allowed_updates: ['message', 'inline_query', 'callback_query'],
         });
         utils_1.logger.info('Webhook initialized...');

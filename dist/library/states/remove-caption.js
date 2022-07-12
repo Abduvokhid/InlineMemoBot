@@ -23,6 +23,7 @@ function removeCaption(ctx) {
             yield ctx.api.editMessageReplyMarkup(ctx.chat.id, ctx.callbackQuery.message.message_id, {
                 reply_markup: keyboard
             });
+            yield ctx.answerCallbackQuery();
         }
     });
 }

@@ -17,6 +17,7 @@ async function removeCaption (ctx: MyContext) {
     await ctx.api.editMessageReplyMarkup(ctx.chat!.id, ctx.callbackQuery!.message!.message_id, {
       reply_markup: keyboard
     })
+    await ctx.answerCallbackQuery()
   }
 }
 

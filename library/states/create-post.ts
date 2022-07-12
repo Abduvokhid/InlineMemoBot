@@ -15,6 +15,7 @@ async function createPost (ctx: MyContext) {
   ctx.session.step = 'create_post'
   ctx.session.post = undefined
   ctx.session.current_id = ctx.callbackQuery?.message?.message_id.toString()
+  await ctx.answerCallbackQuery()
 }
 
 export default createPost

@@ -21,6 +21,7 @@ function sponsors(ctx) {
         const text = `${sponsors.content}\n${list}`;
         if (ctx.callbackQuery) {
             yield ctx.editMessageText(text, { disable_web_page_preview: true, reply_markup: inline_keyboard });
+            yield ctx.answerCallbackQuery();
         }
         else {
             const message = yield ctx.reply(text, { disable_web_page_preview: true, reply_markup: inline_keyboard });

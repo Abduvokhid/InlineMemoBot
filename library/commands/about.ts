@@ -12,6 +12,7 @@ async function about (ctx: MyContext) {
 
   if (ctx.callbackQuery) {
     await ctx.editMessageText(text, { disable_web_page_preview: true, reply_markup: inline_keyboard })
+    await ctx.answerCallbackQuery()
   } else {
     const message = await ctx.reply(text, { disable_web_page_preview: true, reply_markup: inline_keyboard })
 

@@ -14,8 +14,8 @@ const app = express()
 
 middlewares.setup(app)
 
-app.post(process.env.WEBHOOK_PATH!, webhookCallback(bot, 'express', { secretToken: process.env.WEBHOOK_SECRET }))
-app.post(process.env.BUTTON_PATH!, addButton)
+app.post('/telegram/bot', webhookCallback(bot, 'express', { secretToken: process.env.BOT_SECRET }))
+app.post('/buttons/add', addButton)
 
 async function botErrorHandler (err: BotError<MyContext>) {
   const e = err.error

@@ -13,7 +13,7 @@ export function isValidUrl (urlString: string) {
 }
 
 export function generateKeyboard (buttons: Button[][], token: string) {
-  const url = `${process.env.BUTTON_DOMAIN}${process.env.BUTTON_PATH}`
+  const url = `${process.env.WEBAPP_DOMAIN}/buttons/add`
   const keyboard = new InlineKeyboard()
   buttons.forEach((buttonsRow, index) => {
     buttonsRow.forEach((button, index2) => keyboard.text(button.name, `remove_button:${index}-${index2}`))

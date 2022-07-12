@@ -24,6 +24,7 @@ function createPost(ctx) {
         ctx.session.step = 'create_post';
         ctx.session.post = undefined;
         ctx.session.current_id = (_c = (_b = ctx.callbackQuery) === null || _b === void 0 ? void 0 : _b.message) === null || _c === void 0 ? void 0 : _c.message_id.toString();
+        yield ctx.answerCallbackQuery();
     });
 }
 exports.default = createPost;

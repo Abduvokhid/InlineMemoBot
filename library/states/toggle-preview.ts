@@ -22,6 +22,7 @@ async function togglePreview (ctx: MyContext) {
       .text(buttons.go_back, 'create_post').text(buttons.confirm_post, 'confirm_post').row()
     await ctx.api.editMessageReplyMarkup(ctx.chat!.id, ctx.callbackQuery!.message!.message_id, { reply_markup: keyboard })
     post.disable_preview = disable_preview
+    await ctx.answerCallbackQuery()
   }
 }
 
