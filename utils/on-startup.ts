@@ -1,4 +1,4 @@
-import { UserFromGetMe } from 'grammy/out/platform.node'
+import { UserFromGetMe } from 'grammy/out/types'
 import bot from '../bot'
 import logger from './logger'
 import botCommands from './bot-commands'

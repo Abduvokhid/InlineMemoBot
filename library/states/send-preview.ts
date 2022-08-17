@@ -1,6 +1,6 @@
 import { MyPrivateContext } from '../../types'
 import { InlineKeyboard } from 'grammy'
-import { Message } from 'grammy/out/platform.node'
+import { Message } from 'grammy/out/types'
 import { MessageEntity } from '@grammyjs/types/message'
 import { Other } from '@grammyjs/hydrate'
 import { generateKeyboard } from '../../utils/misc'

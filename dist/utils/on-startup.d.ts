@@ -1,3 +1,3 @@
-import { UserFromGetMe } from 'grammy/out/platform.node';
+import { UserFromGetMe } from 'grammy/out/types';
 declare function onStartup(botInfo: UserFromGetMe): Promise<void>;
 export default onStartup;

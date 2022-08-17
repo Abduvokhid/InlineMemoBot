@@ -1,5 +1,5 @@
 import { Bot } from 'grammy'
-import { BotCommand } from 'grammy/out/platform.node'
+import { BotCommand } from 'grammy/out/types'
 import { type BotCommandScope } from '@grammyjs/types'
 import logger from './logger'
 import { MyContext } from '../types'

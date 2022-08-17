@@ -3,7 +3,7 @@ import { MyContext } from '../types'
 import translation, { TranslationKey } from '../translation'
 import { PostDocument, PostModel } from '../models/Post'
 import { MessageEntity } from '@grammyjs/types/message'
-import { InlineQueryResult } from 'grammy/out/platform.node'
+import { InlineQueryResult } from 'grammy/out/types'
 import { UserModel } from '../models/User'
 import { generateInlineKeyboard } from '../utils/misc'
 
