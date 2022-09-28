@@ -26,6 +26,7 @@ async function confirmPost (ctx: MyContext) {
   const message = `<code>@InlineMemoBot ${unique_id}</code>`
   await ctx.editMessageText(message)
   await ctx.api.deleteMessage(ctx.chat!.id, parseInt(ctx.session.post!.preview_id!))
+  ctx.session.step = 'create_post'
   ctx.session.post = undefined
   await startCustom(ctx, confirm_post.content)
 }

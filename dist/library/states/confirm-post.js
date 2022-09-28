@@ -34,6 +34,7 @@ function confirmPost(ctx) {
         const message = `<code>@InlineMemoBot ${unique_id}</code>`;
         yield ctx.editMessageText(message);
         yield ctx.api.deleteMessage(ctx.chat.id, parseInt(ctx.session.post.preview_id));
+        ctx.session.step = 'create_post';
         ctx.session.post = undefined;
         yield (0, commands_1.startCustom)(ctx, confirm_post.content);
     });

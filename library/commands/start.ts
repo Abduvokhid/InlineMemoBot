@@ -16,9 +16,13 @@ async function startCustom (ctx: MyContext, text: string | undefined = undefined
     reply_markup: inline_keyboard
   })
 
-  if (ctx.session.post?.settings_id) await ctx.api.deleteMessage(ctx.chat!.id, parseInt(ctx.session.post!.settings_id))
-  if (ctx.session.post?.preview_id) await ctx.api.deleteMessage(ctx.chat!.id, parseInt(ctx.session.post.preview_id))
-  if (ctx.session.current_id) await ctx.api.deleteMessage(ctx.chat!.id, parseInt(ctx.session.current_id))
+  try {
+    if (ctx.session.post?.settings_id) await ctx.api.deleteMessage(ctx.chat!.id, parseInt(ctx.session.post!.settings_id))
+    if (ctx.session.post?.preview_id) await ctx.api.deleteMessage(ctx.chat!.id, parseInt(ctx.session.post.preview_id))
+    if (ctx.session.current_id) await ctx.api.deleteMessage(ctx.chat!.id, parseInt(ctx.session.current_id))
+  } catch (e: any) {
+    console.error(e, e.stack)
+  }
 
   ctx.session.step = 'home'
   ctx.session.post = undefined
