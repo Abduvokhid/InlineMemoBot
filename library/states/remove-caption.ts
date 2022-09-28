@@ -1,8 +1,10 @@
 import { MyContext } from '../../types'
 import { InlineKeyboard } from 'grammy'
+import { generateKeyboard } from '../../utils/misc'
 
 async function removeCaption (ctx: MyContext) {
-  const { post } = ctx.session
+  const { post, credentials } = ctx.session
+  const token = credentials!.token
   const { buttons } = ctx.state.translation!
   if (post && post.type !== 'text') {
     ctx.session.post!.caption = undefined
@@ -10,7 +12,7 @@ async function removeCaption (ctx: MyContext) {
     await ctx.api.editMessageCaption(
       ctx.from!.id,
       parseInt(post.preview_id!),
-      { caption: '' }
+      { caption: '', reply_markup: generateKeyboard(post.buttons, token) }
     )
     const keyboard = new InlineKeyboard()
       .text(buttons.go_back, 'create_post').text(buttons.confirm_post, 'confirm_post').row()

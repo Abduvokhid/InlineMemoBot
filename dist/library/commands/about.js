@@ -24,12 +24,17 @@ function about(ctx) {
         }
         else {
             const message = yield ctx.reply(text, { disable_web_page_preview: true, reply_markup: inline_keyboard });
-            if ((_a = ctx.session.post) === null || _a === void 0 ? void 0 : _a.settings_id)
-                yield ctx.api.deleteMessage(ctx.chat.id, parseInt(ctx.session.post.settings_id));
-            if ((_b = ctx.session.post) === null || _b === void 0 ? void 0 : _b.preview_id)
-                yield ctx.api.deleteMessage(ctx.chat.id, parseInt(ctx.session.post.preview_id));
-            if (ctx.session.current_id)
-                yield ctx.api.deleteMessage(ctx.chat.id, parseInt(ctx.session.current_id));
+            try {
+                if ((_a = ctx.session.post) === null || _a === void 0 ? void 0 : _a.settings_id)
+                    yield ctx.api.deleteMessage(ctx.chat.id, parseInt(ctx.session.post.settings_id));
+                if ((_b = ctx.session.post) === null || _b === void 0 ? void 0 : _b.preview_id)
+                    yield ctx.api.deleteMessage(ctx.chat.id, parseInt(ctx.session.post.preview_id));
+                if (ctx.session.current_id)
+                    yield ctx.api.deleteMessage(ctx.chat.id, parseInt(ctx.session.current_id));
+            }
+            catch (e) {
+                console.error(e, e.stack);
+            }
             ctx.session.step = 'home';
             ctx.session.post = undefined;
             ctx.session.current_id = message.message_id.toString();

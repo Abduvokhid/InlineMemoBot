@@ -1,9 +1,10 @@
 import { MyContext } from '../../types'
 import { InlineKeyboard } from 'grammy'
-import { logger } from '../../utils'
+import { generateKeyboard } from '../../utils/misc'
 
 async function togglePreview (ctx: MyContext) {
-  const { post } = ctx.session
+  const { post, credentials } = ctx.session
+  const token = credentials!.token
   const { buttons } = ctx.state.translation!
   if (post && post.type === 'text' && typeof post.disable_preview === 'boolean') {
     const disable_preview = !post.disable_preview
@@ -15,7 +16,7 @@ async function togglePreview (ctx: MyContext) {
       ctx.chat!.id,
       parseInt(post.preview_id!),
       post.content,
-      { ...options, disable_web_page_preview: disable_preview }
+      { ...options, disable_web_page_preview: disable_preview, reply_markup: generateKeyboard(post.buttons, token) }
     )
     const keyboard = new InlineKeyboard()
       .text(disable_preview ? buttons.enable_preview : buttons.disable_preview, 'toggle_preview').row()

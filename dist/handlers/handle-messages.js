@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const commands_1 = require("../library/commands");
 const router_1 = require("@grammyjs/router");
 const post_step_1 = __importDefault(require("./post-step"));
+const enhance_step_1 = __importDefault(require("./enhance-step"));
 function setup(bot) {
     return __awaiter(this, void 0, void 0, function* () {
         bot.command('start', commands_1.start);
@@ -26,7 +27,7 @@ function setup(bot) {
         const post = router.route('create_post');
         post.on('message', post_step_1.default);
         const enhance = router.route('enhance_post');
-        enhance.on('message', (ctx) => __awaiter(this, void 0, void 0, function* () { return yield ctx.deleteMessage(); }));
+        enhance.on('message', enhance_step_1.default);
         router.otherwise(commands_1.start);
         bot.use(router);
     });

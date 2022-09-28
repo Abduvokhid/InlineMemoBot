@@ -41,7 +41,7 @@ const translation = {
                 placeholder: 'Send the content...'
             },
             enhance_post: {
-                content: '<b>⬆ This is how your post will look like.</b>\n\nPlease, customize if needed. Then confirm the post creation.\n\nClick the added button to remove it from the post.',
+                content: '<b>⬆ This is how your post will look like.</b>\n\nPlease, customize if needed. Then confirm the post creation.\n\nMoreover, you can add link buttons right here by sending one or more links in the following format: <code>[Text + Link]</code>. To add several link buttons in a row, write links in the same line. To add several rows, separate them with a new line.\n\nPS: Click the added button to remove it from the post.',
                 placeholder: 'Customize or confirm...'
             },
             confirm_post: {
@@ -88,7 +88,7 @@ const translation = {
                 placeholder: 'Отправьте контент...'
             },
             enhance_post: {
-                content: '<b>⬆ Это превью вашего поста.</b>\n\nПожалуйста, кастомизируйте и потом подтвердите создание поста.\n\nНажмите на добавлениие кнопки, чтобы удалить их с поста.',
+                content: '<b>⬆ Это превью вашего поста.</b>\n\nПожалуйста, кастомизируйте и потом подтвердите создание поста.\n\nКроме того, вы можете добавлять кнопки (ссылки) прямо здесь отправляя одну или несколько кнопок в формате [Текст + Ссылка]. Чтобы добавлять несколько кнопок в один ряд, напишите ссылки в одной строке. Если хотите добавлять кнопки на несколько рядов, напишите их с новой строкой.\n\nPS: Нажмите на добавленные кнопки, чтобы удалить их с поста.',
                 placeholder: 'Редактируйте или подтвердите...'
             },
             confirm_post: {
